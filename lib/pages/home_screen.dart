@@ -9,9 +9,12 @@ import '../constants.dart';
 class HomeScreen extends GetView<HomeController> {
   void openBottomSheet() {
     Get.bottomSheet(
+      
       Expanded(
         child: Container(
+          height: 300,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               // const SizedBox(height: 5),
               Row(
@@ -70,63 +73,101 @@ class HomeScreen extends GetView<HomeController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    
-                    ElevatedButton(
-                      
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('حساب عمومی',textDirection: TextDirection.rtl,), // <-- Text
-                          SizedBox(
-                            width: 5,
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        style: TextButton.styleFrom(
+                          side: BorderSide(
+                            color: myBlue,
+                            width: 0.5,
                           ),
-                          Icon(
-                            // <-- Icon
-                            Icons.group,
-                            size: 24.0,
+                          textStyle: TextStyle(color: myBlue),
+                          backgroundColor: myLighBlue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.0),
                           ),
-                        ],
+                        ),
+                        onPressed: () => {},
+                        label: Text('حساب عمومی',
+                            textDirection: TextDirection.rtl),
+                        icon: Icon(
+                          Icons.group,
+                          color: myBlue,
+                        ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('حساب خصوصی',textDirection: TextDirection.rtl,), // <-- Text
-                          SizedBox(
-                            width: 5,
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextButton.icon(
+                        style: TextButton.styleFrom(
+                          side: BorderSide(
+                            color: myGrey,
+                            width: 0.5,
                           ),
-                          Icon(
-                            // <-- Icon
-                            Icons.file_copy,
-                            size: 24.0,
+                          backgroundColor: backgroundGray,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24.0),
                           ),
-                        ],
+                        ),
+                        onPressed: () => {},
+                        label: Text(
+                          'حساب خصوصی',
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(color: myGrey),
+                        ),
+                        icon: Icon(
+                          Icons.file_copy,
+                          color: myGray,
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Center(
-                child: Text(
-                  'Bottom Sheet',
-                  style: TextStyle(fontSize: 18),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                
+                                child: Text(
+                  'توجه : فقط شما به حساب خصوصی دسترسی دارید.',
+                  style: TextStyle(fontSize: 13, color: myDarkerGray),
+                  textDirection: TextDirection.rtl,
                 ),
               ),
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text('Close'),
+              SizedBox(
+                height: 20,
+              ),
+
+              Divider(
+                color: myGray,
+                height: 0.5,
+              ),
+             SizedBox(height: 20,),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: OutlinedButton(
+                  onPressed: () {
+                    Get.toNamed('/book_screen')!.then((value) {
+          MyApp.changeColor(myBlue, Brightness.light);
+        });
+                  },
+                  child: const Text('ذخیره کردن',textDirection: TextDirection.rtl,),
+                  style: OutlinedButton.styleFrom(
+                    // the height is 50, the width is full
+                    minimumSize: const Size.fromHeight(50)),
+                ),
               ),
             ],
           ),
         ),
       ),
+      // isScrollControlled = true,
+      isScrollControlled: true,
       backgroundColor: myWhite,
       elevation: 0,
       shape: RoundedRectangleBorder(
