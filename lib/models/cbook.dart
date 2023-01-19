@@ -40,7 +40,7 @@ class CBook{
   bool isSynced;
   String balance;
 
-  CBook({this.title='-1',this.isPrivate=true}):
+  CBook({this.title='-1',this.isPrivate=true,}):
   
   this.id = Uuid().v1(),
   this.description = '',

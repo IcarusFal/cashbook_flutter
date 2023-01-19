@@ -13,12 +13,9 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPrivate = true;
-    
     final cbookControllerP = Get.find<BookController>();
     final _formKey = GlobalKey<FormState>();
-   
-    
+
     MyApp.changeColor(myBlue, Brightness.light);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -59,12 +56,10 @@ class HomeScreen extends GetView<HomeController> {
                         height: 0.5,
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 15, right: 15, top: 30),
+                        padding: EdgeInsets.only(left: 15, right: 15, top: 30),
                         child: Directionality(
                           textDirection: TextDirection.rtl,
                           child: TextFormField(
-                           
                             onSaved: (value) => title = value.toString(),
                             autofocus: true,
                             textAlign: TextAlign.right,
@@ -92,75 +87,99 @@ class HomeScreen extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: TextButton.icon(
-                                style: TextButton.styleFrom(
-                                  side: BorderSide(
-                                    color: isPrivate ? backgroundGray : myBlue,
-                                    width: 0.5,
-                                  ),
-                                  textStyle: TextStyle(
-                                      color: isPrivate ? myGrey : myBlue),
-                                  backgroundColor:
-                                      isPrivate ? backgroundGray : myLighBlue,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24.0),
-                                  ),
-                                ),
-                                onPressed: () => {
-                                  isPrivate = false,
-                                },
-                                label: Text('حساب عمومی',
-                                    style: TextStyle(
-                                      color: isPrivate ? myGrey : myBlue,
+                      //set isPrivate
+                      Obx(
+                        () => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: TextButton.icon(
+                                  style: TextButton.styleFrom(
+                                    side: BorderSide(
+                                      color: cbookControllerP.isPrivate.value
+                                          ? backgroundGray
+                                          : myBlue,
+                                      width: 0.5,
                                     ),
-                                    textDirection: TextDirection.rtl),
-                                icon: Icon(
-                                  Icons.group,
-                                  color: isPrivate ? myGrey : myBlue,
+                                    textStyle: TextStyle(
+                                        color: cbookControllerP.isPrivate.value
+                                            ? myGrey
+                                            : myBlue),
+                                    backgroundColor:
+                                        cbookControllerP.isPrivate.value
+                                            ? backgroundGray
+                                            : myLighBlue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                  ),
+                                  onPressed: () => {
+                                    cbookControllerP.setIsPrivate(
+                                        !cbookControllerP.isPrivate.value)
+                                  },
+                                  label: Text('حساب عمومی',
+                                      style: TextStyle(
+                                        color: cbookControllerP.isPrivate.value
+                                            ? myGrey
+                                            : myBlue,
+                                      ),
+                                      textDirection: TextDirection.rtl),
+                                  icon: Icon(
+                                    Icons.group,
+                                    color: cbookControllerP.isPrivate.value
+                                        ? myGrey
+                                        : myBlue,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: TextButton.icon(
-                                style: TextButton.styleFrom(
-                                  side: BorderSide(
-                                    color: isPrivate ? myBlue : backgroundGray,
-                                    width: 0.5,
+                              Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: TextButton.icon(
+                                  style: TextButton.styleFrom(
+                                    side: BorderSide(
+                                      color: cbookControllerP.isPrivate.value
+                                          ? myBlue
+                                          : backgroundGray,
+                                      width: 0.5,
+                                    ),
+                                    backgroundColor:
+                                        cbookControllerP.isPrivate.value
+                                            ? myLighBlue
+                                            : backgroundGray,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
                                   ),
-                                  backgroundColor:
-                                      isPrivate ? myLighBlue : backgroundGray,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(24.0),
+                                  onPressed: () => {
+                                    cbookControllerP.setIsPrivate(
+                                        !cbookControllerP.isPrivate.value)
+                                  },
+                                  label: Text(
+                                    'حساب خصوصی',
+                                    textDirection: TextDirection.rtl,
+                                    style: TextStyle(
+                                      color: cbookControllerP.isPrivate.value
+                                          ? myBlue
+                                          : myGrey,
+                                    ),
                                   ),
-                                ),
-                                onPressed: () => {
-                                  isPrivate = true,
-                                },
-                                label: Text(
-                                  'حساب خصوصی',
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                    color: isPrivate ? myBlue : myGrey,
+                                  icon: Icon(
+                                    Icons.file_copy,
+                                    color: cbookControllerP.isPrivate.value
+                                        ? myBlue
+                                        : myGray,
                                   ),
-                                ),
-                                icon: Icon(
-                                  Icons.file_copy,
-                                  color: isPrivate ? myBlue : myGray,
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
+                      //end of set isPrivate
                       Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15),
                         child: Text(
@@ -183,24 +202,29 @@ class HomeScreen extends GetView<HomeController> {
                         padding: const EdgeInsets.only(left: 15, right: 15),
                         child: OutlinedButton(
                           onPressed: () {
-                            
-                              _formKey.currentState!.save();
-                              cbookControllerP.addCBook(
-                                  CBook(title: title, isPrivate: isPrivate));
-                                  Navigator.of(context).pop();
-                            
-                            Get.toNamed('/book_screen')!.then((value) {
-                              MyApp.changeColor(myBlue, Brightness.light);
-                            });
-                            
+                            _formKey.currentState!.save();
+                            cbookControllerP.addCBook(CBook(
+                                title: title,
+                                isPrivate: cbookControllerP.isPrivate.value));
+                            Navigator.of(context).pop();
+
+                            if (cbookControllerP.isPrivate.value == true) {
+                              Get.toNamed('/edit_book_screen')!.then((value) {
+                                MyApp.changeColor(myWhite, Brightness.light);
+                              });
+                            } else {
+                              Get.toNamed('/book_screen')!.then((value) {
+                                MyApp.changeColor(myWhite, Brightness.light);
+                              });
+                            }
                           },
-                          child: const Text(
+                          child: Text(
                             'ذخیره کردن',
                             textDirection: TextDirection.rtl,
                           ),
                           style: OutlinedButton.styleFrom(
                               // the height is 50, the width is full
-                              minimumSize: const Size.fromHeight(50)),
+                              minimumSize: Size.fromHeight(50)),
                         ),
                       ),
                     ],

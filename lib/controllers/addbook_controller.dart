@@ -27,30 +27,32 @@
 //     update();
 //   }
 
-
 // }
 
 import 'package:cashbook/models/cbook.dart';
 import 'package:get/get.dart';
 
-class BookController extends GetxController{
-  List<CBook> _cbooks=[];
+class BookController extends GetxController {
+  List<CBook> _cbooks = [];
   List<CBook> get cbooks => _cbooks;
 
-  CBookController(){
-    _cbooks = [];
+  RxBool isPrivate = true.obs;
 
+  void setIsPrivate(bool val) {
+    isPrivate.value = val;
   }
 
+  CBookController() {
+    _cbooks = [];
+  }
 
-  addCBook(CBook cbook){
+  addCBook(CBook cbook) {
     _cbooks.add(cbook);
     update();
-  } 
-
-  deleteCBook(String id){
-    _cbooks.removeWhere((element) => element.id==id);
-    update();
   }
 
+  deleteCBook(String id) {
+    _cbooks.removeWhere((element) => element.id == id);
+    update();
+  }
 }

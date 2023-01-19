@@ -3,6 +3,7 @@ import 'package:cashbook/controllers/addbook_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class AddBookScreen extends GetView<BookController> {
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,34 @@ class AddBookScreen extends GetView<BookController> {
         automaticallyImplyLeading: false,
         title: Align(
           alignment: Alignment.centerRight,
-          child: new Text(
+          child: Text(
             "اضافه کردن اعضا",
-            style: new TextStyle(fontSize: 16.0, color: myBlack),
+            style: TextStyle(fontSize: 16.0, color: myBlack),
           ),
         ),
       ),
       body: SafeArea(
         child: Container(
-          child: TextButton(
-            onPressed: () => Get.back(),
-            child: Text('book'),
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: Column(
+              children: [
+                Container(
+                  color: myLightGreen,
+                  padding: EdgeInsets.only(top: 10,left: 10,right: 10,bottom: 10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.check_circle,color: myGreen,),
+                      SizedBox(width: 15,),
+                      Text('نام با موفقیت اضافه شد',style: TextStyle(color: myBlack),)
+                    ],
+                  ),
+                ),
+                TextButton(onPressed:(){
+                  Get.toNamed('/edit_book_screen');
+                }, child: Text('go next'))
+              ],
+            ),
           ),
         ),
       ),
