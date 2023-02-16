@@ -355,7 +355,9 @@ class HomeScreen extends GetView<HomeController> {
                             bookController.cbooks[index].description,
                             textAlign: TextAlign.right,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('edit_book_screen');
+                          },
                           trailing: Container(
                             child: CircleAvatar(
                               radius: 25,
